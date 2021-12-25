@@ -230,6 +230,12 @@
       </tr>
 
     </table>
+
+    <div class="row pt-4 pb-4">
+      <div class="col-4 offset-8 pr-3">
+        <div class="btn btn-success btn-block"><i class="fa fa-download fa-lg mr-2"></i><b>Export JSON<b></div>
+      </div>
+    </div>
     <!-- </div> -->
     <!-- /.content -->
     @endif
