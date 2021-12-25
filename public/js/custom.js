@@ -4,12 +4,39 @@ function checkButton(id) {
     if (x.style.backgroundColor == "blue") {
         x.style.backgroundColor = "";
         x.style.color = "";
-        x.setAttribute("class", "unchecked");
+        x.classList.remove("checked");
+        x.classList.add("unchecked");
     } else {
-        x.setAttribute("class", "checked");
+        x.classList.remove("unchecked");
+        x.classList.add("checked");
         x.style.backgroundColor = "blue";
         x.style.color = "white";
     }
+    checkLogics();
+}
+
+function checkLogics(){
+    document.getElementById("sec1-logic").setAttribute("class", "btn btn-secondary btn-block");
+    document.getElementById("sec2-logic").setAttribute("class", "btn btn-secondary btn-block");
+    document.getElementById("sec3-logic").setAttribute("class", "btn btn-secondary btn-block");
+    btns = document.querySelectorAll(".checked");
+    btns.forEach(x => {
+        if(x.classList.contains("section1")){
+            sec = document.getElementById("sec1-logic");
+            sec.classList.remove("btn-secondary");
+            sec.classList.add("btn-info");
+        }
+        else if(x.classList.contains("section2")){
+            sec = document.getElementById("sec2-logic");
+            sec.classList.remove("btn-secondary");
+            sec.classList.add("btn-info");
+        }
+        else if(x.classList.contains("section3")){
+            sec = document.getElementById("sec3-logic");
+            sec.classList.remove("btn-secondary");
+            sec.classList.add("btn-info");
+        }
+    });
 }
 
 function loadSheet(){

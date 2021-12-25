@@ -165,15 +165,21 @@
     <!-- /.grid-header -->
     <!-- Main Grid -->
     <!-- <div class="row float-left" style="width:100%"> -->
-    <table class="table table-bordered" cellspacing="0" cellpadding="0">
+    <table class="table " cellspacing="0" cellpadding="0">
       <?php $count = 0 ?>
+      <tr class="text-center">
+        <th class="text-left">Label Description</th>
+        <th>Section 1</th>
+        <th>Section 2</th>
+        <th>Section 3</th>
+      </tr>
       @foreach($data as $r => $row )
       <tr>
-        @foreach($row as $col)
+        @foreach($row as $c => $col)
           @if($col instanceof stdClass)
             <td class="text-center">
               @foreach($col as $btn)
-                <input class="unchecked" type="button" value="{{$btn}}" id="{{$count += 1}}" onclick="checkButton('{{$count}}')">
+                <input class="unchecked {{$c}}" type="button" value="{{$btn}}" id="{{$count += 1}}" onclick="checkButton('{{$count}}')">
               @endforeach
             </td>
           @elseif(is_string($col))
@@ -182,6 +188,47 @@
         @endforeach
       </tr>
       @endforeach
+
+      <tr class="mt-5 mb-5">
+        <td>JSON String</td>
+        <td colspan=3>
+          <input class="form-control" type="input" name="JSON-string" id="JSON-string" value="JSON String to be Exported" placeholder="JSON String of selected buttons">
+        </td>
+      </tr>
+
+      <tr class="pt-10 pb-10">
+        <td>Logic</td>
+        <td><button class="btn btn-secondary btn-block" id="sec1-logic">Section 1 Decision Tree</button></td>
+        <td><button class="btn btn-secondary btn-block" id="sec2-logic">Section 2 Decision Tree</button></td>
+        <td><button class="btn btn-secondary btn-block" id="sec3-logic">Section 3 Decision Tree</button></td>
+      </tr>
+
+      <tr class="mt-5 mb-5">
+        <td>Description Bucket</td>
+        <td>
+          <input class="form-control" type="input" name="desc-bucket-tree1" id="desc-bucket-tree1" value="" placeholder="Description for T1">
+        </td>
+        <td>
+          <input class="form-control" type="input" name="desc-bucket-tree2" id="desc-bucket-tree2" value="" placeholder="Description for T2">
+        </td>
+        <td>
+          <input class="form-control" type="input" name="desc-bucket-tree3" id="desc-bucket-tree3" value="" placeholder="Description for T3">
+        </td>
+      </tr>
+
+      <tr class="mt-5 mb-5">
+        <td>Description Bucket</td>
+        <td>
+          <input class="form-control" type="input" name="desp-bucket-tree1" id="desp-bucket-tree1" value="" placeholder="Desposition for T1">
+        </td>
+        <td>
+          <input class="form-control" type="input" name="desp-bucket-tree2" id="desp-bucket-tree2" value="" placeholder="Desposition for T2">
+        </td>
+        <td>
+          <input class="form-control" type="input" name="desp-bucket-tree3" id="desp-bucket-tree3" value="" placeholder="Desposition for T3">
+        </td>
+      </tr>
+
     </table>
     <!-- </div> -->
     <!-- /.content -->
