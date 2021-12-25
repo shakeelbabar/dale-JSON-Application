@@ -1,0 +1,30 @@
+.tbl {
+    border-collapse: collapse;
+    /* width: inherit; */
+    /* border: solid 1px gray; */
+    align-items: center;
+    /* text-align: left; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+th,td {
+    /* padding: 8px; */
+    /* border: solid 1px gray; */
+}
+
+input {
+    margin: 1px;
+    padding: 2px 30px 2px 30px;
+}
+
+.lbl {
+    padding-right: 50px;
+}
+
+.space {
+    color: white;
+    font-size: 4px;
+    margin: 20px 0 20px 0;
+}
