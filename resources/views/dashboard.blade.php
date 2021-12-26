@@ -179,11 +179,11 @@
           @if($col instanceof stdClass)
             <td class="text-center">
               @foreach($col as $btn)
-                <input class="unchecked {{$c}}" type="button" value="{{$btn}}" id="{{$count += 1}}" onclick="checkButton('{{$count}}')">
+                <input class="unchecked {{$c}}" type="button" value="{{$btn}} {{$count}}" id="{{$count += 1}}" onclick="checkButton('{{$count}}')">
               @endforeach
             </td>
           @elseif(is_string($col))
-              <td class="text-left">{{$col}}</td>
+            <td class="text-left">{{$col}}</td>
           @endif
         @endforeach
       </tr>

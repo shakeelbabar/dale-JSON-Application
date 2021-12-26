@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use App\Models\Inputdata;
+use App\Models\JSONString;
 use SimpleXLSX;
 use stdClass;
 
@@ -120,13 +122,35 @@ class DashboardController extends Controller
         }
     }
 
+    public function populateInputData($data){
+        foreach($data as $r => $row){
+            $keysSection1 = array_keys(get_object_vars($row->section1));
+            $keysSection2 = array_keys(get_object_vars($row->section2));
+            $keysSection3 = array_keys(get_object_vars($row->section3));
+            for($i = 0; $i<count((array)$row->section1); $i++){
+                // Initiate the Model Instance
+                $inputdata = new Inputdata;
+                $inputdata->label = $row->label;
+                $sec1 = $keysSection1[$i];
+                $sec2 = $keysSection2[$i];
+                $sec3 = $keysSection3[$i];
+                $inputdata->section1 = $row->section1->$sec1;
+                $inputdata->section2 = $row->section2->$sec2;
+                $inputdata->section3 = $row->section3->$sec3;
+                $inputdata->save();
+            }
+        }
+    }
+
     public function loadfile(Request $request)
     {
         // $this->loadSpreadsheet($request);
         if($request->file('file_sheet')){
             $file = $request->file('file_sheet');
             if ( $xlsx = SimpleXLSX::parse($file->getFileInfo()) ) {
-                return View::make('dashboard', ['data'=>$this->formatXLSX($xlsx)]);
+                $data = $this->formatXLSX($xlsx);
+                $this->populateInputData($data);
+                return View::make('dashboard', ['data'=> $data]);
             } else {
                 //echo SimpleXLSX::parseError();
                 return View::make('dashboard', ['data'=>null]);
@@ -171,7 +195,7 @@ class DashboardController extends Controller
                             $nol += 1;
                             $label = 'label' . $nol;
                             $data->$label = new stdClass;
-                            $data->$label->$label = $cell;
+                            $data->$label->label = $cell;
                             $data->$label->section1 = new stdClass;
                             $data->$label->section2 = new stdClass;
                             $data->$label->section3 = new stdClass;
@@ -185,7 +209,7 @@ class DashboardController extends Controller
                                 $nol += 1;
                                 $label = 'label' . $nol;
                                 $data->$label = new stdClass;
-                                $data->$label->$label = $cell;
+                                $data->$label->label = $cell;
                                 $data->$label->section1 = new stdClass;
                                 $data->$label->section2 = new stdClass;
                                 $data->$label->section3 = new stdClass;

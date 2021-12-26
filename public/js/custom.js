@@ -13,6 +13,7 @@ function checkButton(id) {
         x.style.color = "white";
     }
     checkLogics();
+    generateJSONString();
 }
 
 function checkLogics(){
@@ -37,6 +38,21 @@ function checkLogics(){
             sec.classList.add("btn-info");
         }
     });
+}
+
+function generateJSONString(){
+    // Get all checked buttons
+    let batch = document.querySelectorAll('.checked');
+    let JSON_batch = {};
+    batch.forEach(x => {
+        JSON_batch[x.getAttribute("value")] = x.getAttribute("value");
+    });
+    // convert JSON object to string
+    const data = JSON.stringify(JSON_batch);
+
+    //set JSON String Input
+    var JSONstring = document.getElementById("JSON-string");
+    JSONstring.setAttribute("value", data);
 }
 
 function loadSheet(){
