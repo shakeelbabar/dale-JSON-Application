@@ -104,26 +104,31 @@ function loadModel() {
 }
 function sendBatch() {
     let batch = document.querySelectorAll('.checked');
-    let JSON_batch = {};
-    batch.forEach(x => {
-        JSON_batch[x.getAttribute("value")] = x.getAttribute("value");
-    });
-    // convert JSON object to string
-    const data = JSON.stringify(JSON_batch);
+    if(Object.keys(batch).length != 0){
+        let JSON_batch = {};
+        batch.forEach(x => {
+            JSON_batch[x.getAttribute("value")] = x.getAttribute("value");
+        });
+        // convert JSON object to string
+        const data = JSON.stringify(JSON_batch);
 
-    // console.log(data);
-    var blob = new Blob([data], {
-        //type: 'application/json'
-        type: 'octet/stream'
-    });
-    // console.log(blob);
-    var anchor = document.createElement('a')
-    anchor.download = "batch.json";
-    anchor.href = window.URL.createObjectURL(blob);
-    anchor.innerHTML = "download"
-    anchor.click();
+        // console.log(data);
+        var blob = new Blob([data], {
+            //type: 'application/json'
+            type: 'octet/stream'
+        });
+        // console.log(blob);
+        var anchor = document.createElement('a')
+        anchor.download = "batch.json";
+        anchor.href = window.URL.createObjectURL(blob);
+        anchor.innerHTML = "download"
+        anchor.click();
 
-    console.log("JSON data is saved.");
+        console.log("JSON data is saved.");
+    }else{
+        alert("Please select buttons first.");
+    }
+
 }
 
 $('#inputGroupFile02').on('change',function(){
